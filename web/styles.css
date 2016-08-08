@@ -1,0 +1,58 @@
+@import url(https://fonts.googleapis.com/css?family=Roboto);
+
+html, body {
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  padding-top: 30px;
+  font-family: 'Roboto', sans-serif;
+}
+
+#wrapper {
+  width: 800px;
+  margin: auto;
+}
+
+#btns{
+  margin-bottom: 20px;
+}
+
+table {
+    margin: auto;
+}
+
+th, td {
+    padding: 15px;
+    text-align: left;
+}
+
+td {
+    width:200px;
+    max-width: 200px;
+}
+
+th {
+    background-color: #4CAF50;
+    color: white;
+}
+
+
+input [type='checkbox']{
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    display: inline-block;
+    height: 17px;
+    width: 17px;
+    padding:.75em 1em .5em 1em;
+    background-color: gray;
+}
+
+input[type='checkbox']:checked{
+    background-color: green;
+}
+
+input:hover {
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+
