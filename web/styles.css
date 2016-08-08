@@ -5,6 +5,7 @@ html, body {
   height: 100%;
   margin: 0;
   padding-top: 30px;
+  padding-left: 3px;
   font-family: 'Roboto', sans-serif;
 }
 
@@ -53,6 +54,38 @@ input[type='checkbox']:checked{
 
 input:hover {
   box-shadow: 0 1px 1px 0 rgba(0,0,0,0.1);
+}
+
+#stat{
+    width: 300px;
+    padding: 3px;
+}
+
+#fc{
+    width: 300px;
+    padding: 3px;
+
+}
+
+#stat_wrapper{
+    width: 300px;
+    height: 60px;
+    margin-bottom: 10px;
+    padding: 3px;
+}
+
+#blue{
+    height: 30px;
+    width: 300px;
+    background-color: lightblue;
+    padding: 3px;
+}
+
+#gray{
+    height: 30px;
+    width: 300px;
+    padding: 3px;
+    background-color: lightgray;
 }
 
 

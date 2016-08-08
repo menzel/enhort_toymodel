@@ -11,7 +11,7 @@ var end = [70, 130, 350, 640, 750];
 var pos_rand = [];
 var pos_obs = [];
 var rng = new Random();
-var heigth = 50;
+var height = 50;
 var width = 800;
 
 void main() {
@@ -39,15 +39,15 @@ void main() {
 }
 
 void drawIntervals(CanvasRenderingContext2D ctx, List start, List end) {
-     ctx.fillStyle = "lightblue";
-     for(var i = 0; i < start.length; i++){
-       ctx.fillRect(start[i], 0, end[i] - start[i], heigth);
-     }
+  ctx.fillStyle = "lightblue";
+  for(var i = 0; i < start.length; i++){
+    ctx.fillRect(start[i], 0, end[i] - start[i], height);
+  }
 }
 
 void drawTrack(CanvasRenderingContext2D ctx) {
-     ctx..fillStyle = "lightgray"
-      ..fillRect(0, 0, width, heigth);
+  ctx..fillStyle = "lightgray"
+    ..fillRect(0, 0, width, height);
 }
 
 void generateRandom(ctx, n){
@@ -61,7 +61,7 @@ void generateRandom(ctx, n){
     }
 
     ctx..fillStyle = "blue"
-    ..fillRect(x, 0, 1, heigth);
+      ..fillRect(x, 0, 1, height);
   }
 
   stats();
@@ -72,28 +72,28 @@ void generateRandom(ctx, n){
 
 void handler(MouseEvent event) {
 
-    final x = event.client.x - ctx.canvas.offset.left;
-    RadioButtonInputElement radios = querySelector("#data");
+  final x = event.client.x - ctx.canvas.offset.left;
+  RadioButtonInputElement radios = querySelector("#data");
 
-    if(radios.checked){ // observed
-          if(!pos_obs.contains(x)) {
-            pos_obs.add(x);
-          }
-
-          ctx..fillStyle = "red"
-          ..fillRect(x, 0, 1, heigth);
-    } else{ //rand:
-
-      if(!pos_rand.contains(x)) {
-        pos_rand.add(x);
-      }
-
-          ctx..fillStyle = "blue"
-          ..fillRect(x, 0, 1, heigth);
+  if(radios.checked){ // observed
+    if(!pos_obs.contains(x)) {
+      pos_obs.add(x);
     }
 
+    ctx..fillStyle = "red"
+      ..fillRect(x, 0, 1, height);
+  } else{ //rand:
 
-    stats();
+    if(!pos_rand.contains(x)) {
+      pos_rand.add(x);
+    }
+
+    ctx..fillStyle = "blue"
+      ..fillRect(x, 0, 1, height);
+  }
+
+
+  stats();
 }
 
 
@@ -117,16 +117,50 @@ void stats(){
     }
   }
 
-    pos_rand.sort();
-    pos_obs.sort();
+  pos_rand.sort();
+  pos_obs.sort();
 
-    querySelector('#output_obs').text = pos_obs.toString();
-    querySelector('#output_rand').text = pos_rand.toString();
+  querySelector('#output_obs').text = pos_obs.toString();
+  querySelector('#output_rand').text = pos_rand.toString();
 
 
   querySelector('#tab_rand').text = "Inside: $counter_rand | Outside: ${pos_rand.length - counter_rand}";
   querySelector('#tab_obs').text = "Inside: $counter_obs | Outside: ${pos_obs.length - counter_obs}";
 
+
+  // P Value:
+
+  var pValue = fisher(counter_obs, counter_rand, pos_obs.length - counter_obs ,pos_rand.length - counter_rand);
+  querySelector('#stat').text = "P-Value: $pValue";
+
+  if(pValue <= 0.05){
+    querySelector('#stat').style.backgroundColor = "green";
+  } else{
+    querySelector('#stat').style.backgroundColor = "gray";
+  }
+
+
+  // fold change
+
+  var fc = fold_change(counter_obs, counter_rand, pos_obs.length - counter_obs ,pos_rand.length - counter_rand);
+  querySelector('#fc').text = "Fold-change: $fc";
 }
 
+double fold_change(a,b,c,d) {
+  return log((a/c) / (b/d)).abs();
+}
+
+double fisher(a,b,c,d){
+  return (fak(a+b,a) * fak(c+d,c)) / fak(a+b+c+d, a+c);
+}
+
+double fak(n, k) {
+  if(k >  n)
+    throw Error;
+  if(k == 0)
+    return 1.0;
+  if(k > n/2)
+    return fak(n,n-k);
+  return n * fak(n-1,k-1) / k;
+}
 
