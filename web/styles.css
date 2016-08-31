@@ -1,8 +1,8 @@
 @import url(https://fonts.googleapis.com/css?family=Roboto);
 
 html, body {
-  width: 100%;
-  height: 100%;
+  width: 99%;
+  height: 96%;
   margin: 0;
   padding-top: 30px;
   padding-left: 3px;
@@ -12,6 +12,7 @@ html, body {
 #wrapper {
   width: 800px;
   margin: auto;
+  margin-bottom: 20px;
 }
 
 #btns{
@@ -57,19 +58,19 @@ input:hover {
 }
 
 #stat{
-    width: 300px;
-    padding: 3px;
+    width: 100%;
+    height: 20px;
+    padding: 15px;
 }
 
 #fc{
-    width: 300px;
-    padding: 3px;
-
+    width: 100%;
+    height: 20px;
+    padding: 15px;
 }
 
 #stat_wrapper{
-    width: 300px;
-    height: 60px;
+    width: 100%;
     margin-bottom: 10px;
     padding: 3px;
 }
